@@ -58,10 +58,8 @@ function TitleArea({ title, memberCount, chatroomUrl }: propsTitle) {
                 borderRadius: "25%",
                 padding: "8px",
                 marginRight: "8px",
-                height: "40px",
-                width: "40px",
-                display: "inline-block",
-                textAlign: "center",
+                height: "50px",
+                width: "50px",
               }}
             >
               {title?.substring(0, 1)}

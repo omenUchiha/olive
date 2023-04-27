@@ -383,6 +383,8 @@ function DirectMessagesFeedContainer({
   useEffect(() => {
     log(id);
     if (mode == "direct-messages" && id == "") {
+      console.log("the id is : " + id);
+
       let chatroomObject: any = dmHomeFeed[0];
       let chatroomIds = chatroomObject?.chatroom?.id;
       if (chatroomIds == undefined) {

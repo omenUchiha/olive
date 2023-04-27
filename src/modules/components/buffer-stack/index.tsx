@@ -1,16 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import MessageBlock from "../message-boxes-components/MessageBlock";
-import ChatroomContext from "../../contexts/chatroomContext";
 
-export default function BufferStack({
-  bufferMessage,
-  updateHeight,
-  index,
-}: any) {
+export default function BufferStack({ bufferMessage, updateHeight }: any) {
   useEffect(() => {
     updateHeight();
   });
-  const { conversationList } = useContext(ChatroomContext);
   return (
     <>
       <div
@@ -20,7 +14,6 @@ export default function BufferStack({
         <MessageBlock
           userId={bufferMessage.member_id}
           conversationObject={bufferMessage}
-          index={conversationList?.length - 1}
         />
       </div>
     </>

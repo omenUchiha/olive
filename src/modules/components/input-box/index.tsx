@@ -304,6 +304,7 @@ function InputOptions() {
               icon={Icon}
               accept={accept}
               setFile={setFile}
+              file={file}
             />
           );
         } else {
@@ -313,11 +314,20 @@ function InputOptions() {
     </Box>
   );
 }
-function OptionButtonBox({ icon, accept, setFile }: any) {
+function OptionButtonBox({ icon, accept, setFile, file }: any) {
+  const ref = useRef<any>(null);
+  useEffect(() => {
+    if (file.length == 0) {
+      if (ref.current != null) {
+        ref.current!.value = null;
+      }
+    }
+  });
   return (
     <IconButton>
       <label>
         <input
+          ref={ref}
           type={"file"}
           style={{ display: "none" }}
           multiple
