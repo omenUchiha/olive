@@ -1,0 +1,47 @@
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  display: block;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #999;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.App {
+}
+.MuiOutlinedInput-notchedOutline {
+  border: none !important;
+}
+
+.customHeight {
+  height: calc(100% - 65px);
+}
+
+.customScroll {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.msgCard a {
+  color: #007aff;
+}
+
+.customBg {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.feed-panel::-webkit-scrollbar {
+  display: none;
+}
