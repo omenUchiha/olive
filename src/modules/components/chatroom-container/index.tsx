@@ -114,27 +114,17 @@ const ChatContainer: React.FC = () => {
         log(error);
       }
     }
-    loadChatAndMarkReadChatroom().then(() => {
-      setNewHeight();
-      setPageNo(1);
-    });
+    loadChatAndMarkReadChatroom();
   }, [id]);
 
   useEffect(() => {
-    // updateHeight();
+    updateHeight();
     generalContext.setShowLoadingBar(false);
   }, [chatroomContext?.conversationList]);
-  // useEffect(() => {
-  //   setNewHeight();
-  //   setPageNo(1);
-  // }, [generalContext?.currentChatroom?.id, id]);
-
   useEffect(() => {
-    document.addEventListener("updateHeightOnPagination", updateHeight);
-    return () => {
-      document.removeEventListener("updateHeightOnPagination", updateHeight);
-    };
-  });
+    setNewHeight();
+    setPageNo(1);
+  }, [generalContext?.currentChatroom?.id]);
 
   // firebase listener
 
@@ -180,13 +170,9 @@ const ChatContainer: React.FC = () => {
           let currentHeight = scrollTop?.current?.scrollHeight;
           currentHeight = currentHeight;
           if (current < 200 && current % 150 == 0) {
-            paginateChatroomConversations(id, 50)
-              .then((res) => setPageNo((p) => p + 1))
-              .then(() => {
-                document.dispatchEvent(
-                  new CustomEvent("updateHeightOnPagination")
-                );
-              });
+            paginateChatroomConversations(id, 50).then((res) =>
+              setPageNo((p) => p + 1)
+            );
           }
         }}
       >
@@ -212,7 +198,6 @@ const ChatContainer: React.FC = () => {
                 <MessageBlock
                   userId={convo.member.id}
                   conversationObject={convo}
-                  index={index}
                 />
               </div>
             );

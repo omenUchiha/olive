@@ -8,7 +8,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState();
   const [community, setCommunity] = useState();
   useEffect(() => {
-    initiateSDK(false, "70315a15-92bc-4211-ac9b-03729c6a7ab4", "")
+    initiateSDK(false, "0649eb6d-9fbe-4bf0-87d1-a6b660535944", "Gaurav")
       // 0d6f9958-a2db-46aa-a4b1-c40d268b767b
       // initiateSDK(false, "0d6f9958-a2db-46aa-a4b1-c40d268b767b", "")
       .then((res: any) => {

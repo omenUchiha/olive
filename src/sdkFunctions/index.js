@@ -352,7 +352,7 @@ export async function joinChatRoom(collabId, userId) {
 
 export async function markRead(chatroomId) {
   try {
-    const markCall = await myClient.markReadFn({
+    const markCall = await myClient.markRead({
       chatroom_id: chatroomId,
     });
     return jsonReturnHandler(markCall, null);

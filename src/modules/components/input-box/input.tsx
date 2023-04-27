@@ -86,7 +86,12 @@ const sendMessage = async (
         detail: chatroom_id,
       })
     );
-    setBufferMessage(createConversationCall.conversation);
+
+    localHandleConversation(
+      createConversationCall.conversation,
+      filesArray,
+      setBufferMessage
+    );
     // render local changes here
 
     // above this point
@@ -110,7 +115,8 @@ const sendMessage = async (
           fileType = "image";
         }
         index++;
-        myClient.uploadMedia(uploadConfig).then((fileResponse: any) => {
+
+        await myClient.uploadMedia(uploadConfig).then((fileResponse: any) => {
           let onUploadConfig = {
             conversation_id: parseInt(createConversationCall.id),
             files_count: 1,
@@ -133,3 +139,27 @@ const sendMessage = async (
 
 function deliverMessage() {}
 export { sendMessage };
+
+async function localHandleConversation(
+  conversation: any,
+  media: any,
+  setBufferMessage: any
+) {
+  // log(media);
+  let count = 1;
+  if (conversation.has_files) {
+    for (let file of media) {
+      let attachmentTemplate = {
+        url: URL.createObjectURL(file),
+        index: count++,
+        type: file.type.split("/")[0],
+        name: file.name,
+        meta: {
+          size: file.size,
+        },
+      };
+      conversation?.attachments?.push(attachmentTemplate);
+    }
+  }
+  setBufferMessage(conversation);
+}
