@@ -460,6 +460,13 @@ function MoreOptions({ convoId, convoObject, index }: moreOptionsType) {
     newConvoObject?.reactions.push(reactionTemplate);
     chatroomContext.setConversationList(newConvoArr);
   }
+  function deleteMessageLocally() {
+    let newConvoArr = [...chatroomContext.conversationList];
+
+    let newConvoObject = newConvoArr[index];
+    newConvoObject.deleted_by = userContext?.currentUser?.id;
+    chatroomContext.setConversationList(newConvoArr);
+  }
   async function onClickhandlerReport(id: any, reason: any, convoid: any) {
     try {
       const deleteCall = await myClient.pushReport({
@@ -513,7 +520,7 @@ function MoreOptions({ convoId, convoObject, index }: moreOptionsType) {
       clickFunction: () => {
         deleteChatFromDM([convoId])
           .then((r) => {
-            getChatroomConversations(convoObject.chatroom_id, 100);
+            deleteMessageLocally();
           })
           .catch((e) => {
             // console.log(e);
@@ -622,9 +629,6 @@ function DialogBoxMediaDisplay({
   shouldOpen,
   mediaData,
 }: dialogBoxType) {
-  useEffect(() => {
-    log(mediaData);
-  });
   return (
     <Dialog open={shouldOpen} onClose={onClose}>
       {mediaData !== null && mediaData?.type === "image"
