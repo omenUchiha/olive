@@ -33,7 +33,6 @@ const FeedContextProvider: React.FC<childrenType> = ({
     setModeCounter(0);
   }, [mode]);
   useEffect(() => {
-    log("here :" + modeCounter);
     if (modeCounter == 0) {
       if (
         homeFeed.length == 0 &&

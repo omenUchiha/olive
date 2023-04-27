@@ -29,6 +29,14 @@ const ChatroomWrapper: React.FC = () => {
       return generalContext?.currentChatroom?.chatroom_with_user?.name;
     else return generalContext?.currentChatroom?.member?.name;
   }
+  function getChatroomImageUrl() {
+    if (generalContext?.chatroomUrl?.length > 0) {
+      return generalContext?.chatroomUrl;
+    } else {
+      return generalContext?.currentChatroom?.chatroom_image_url;
+    }
+  }
+
   useEffect(() => {
     if (id != "" && id !== undefined) {
       generalContext.setShowLoadingBar(true);
@@ -62,7 +70,7 @@ const ChatroomWrapper: React.FC = () => {
                 ? generalContext?.currentProfile?.participant_count
                 : null
             }
-            chatroomUrl={generalContext.chatroomUrl}
+            chatroomUrl={getChatroomImageUrl()}
           />
 
           {getChatroomComponents(operation)}
